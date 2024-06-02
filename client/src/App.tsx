@@ -7,7 +7,7 @@ function App() {
   const setCookie = () => {
     axios
       .post(
-        "http://localhost:4000/set",
+        "https://api-tes-cookie.vercel.app/set",
         { text: "This Is Text" },
         { withCredentials: true }
       )

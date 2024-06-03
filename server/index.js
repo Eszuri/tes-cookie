@@ -21,14 +21,19 @@ app.get("/", (req, res) => {
 app.post("/set", (req, res) => {
   const text = req.body.text;
   res
-    .cookie("/the_text", text, {
-      path: "/", // Ensure the cookie is available on all routes
-      expires: new Date(Date.now() + 999999 * 1000), // Set to a future date
-      maxAge: 999999 * 1000, // Set to a future date in milliseconds
+    .cookie("the_text", text, {
+      path: "/",
+      //      expires: new Date(Date.now() + 999999 * 1000),
+      maxAge: 999999 * 1000,
       secure: true,
       sameSite: "none",
     })
     .send("success");
+});
+
+app.get("/get", (req, res) => {
+  const kuki = req.cookies.the_text;
+  res.json({ cookie: kuki, message: "cookie get succes" });
 });
 
 app.listen(4000, () => {

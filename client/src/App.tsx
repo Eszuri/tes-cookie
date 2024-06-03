@@ -1,9 +1,10 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 
 function App() {
+  const [data, setData] = useState("");
+
   const setCookie = () => {
     axios
       .post(
@@ -19,17 +20,19 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    axios
+      .get("https://api-tes-cookie.vercel.app/get", { withCredentials: true })
+      .then((res) => {
+        setData(JSON.stringify(res));
+      })
+      .catch((err) => {
+        setData("This Error:" + err);
+      });
+  });
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>{data}</h1>
       <div className="card">
         <button onClick={setCookie}>set Cookie</button>
       </div>

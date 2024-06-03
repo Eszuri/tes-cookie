@@ -20,8 +20,9 @@ app.post("/set", (req, res) => {
   const text = req.body.text;
   res
     .cookie("/the_text", text, {
-      expires: 999999,
-      maxAge: 999999,
+      path: "/", // Ensure the cookie is available on all routes
+      expires: new Date(Date.now() + 999999 * 1000), // Set to a future date
+      maxAge: 999999 * 1000, // Set to a future date in milliseconds
       secure: true,
       sameSite: "none",
     })

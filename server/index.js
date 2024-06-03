@@ -23,6 +23,7 @@ app.post("/set", (req, res) => {
       expires: 999999,
       maxAge: 999999,
       secure: true,
+      sameSite: "none",
     })
     .send("success");
 });

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 
 function App() {
   const [data, setData] = useState("");
 
-  const setCookie = () => {
+  const setCookie = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const allData = new FormData(e.target);
     axios
       .post(
         "https://api-tes-cookie.vercel.app/set",
-        { text: "This Is Text" },
+        { text: allData.get("text") },
         { withCredentials: true }
       )
       .then((res) => {
@@ -32,10 +34,14 @@ function App() {
   });
   return (
     <>
-      <h1>{data}</h1>
-      <div className="card">
-        <button onClick={setCookie}>set Cookie</button>
-      </div>
+      <h6>{data}</h6>
+      <form onSubmit={setCookie}>
+        <label htmlFor="request" />
+        <input id="request" name="text" />
+        <div className="card">
+          <button type="submit">set Cookie</button>
+        </div>
+      </form>
     </>
   );
 }

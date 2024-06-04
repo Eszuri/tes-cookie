@@ -15,7 +15,7 @@ function App() {
         { withCredentials: true }
       )
       .then((res) => {
-        alert(JSON.stringify(res));
+        alert(JSON.stringify(res.data));
       })
       .catch((err) => {
         alert("Error is:" + err);
@@ -26,7 +26,7 @@ function App() {
     axios
       .get("https://api-tes-cookie.vercel.app/get", { withCredentials: true })
       .then((res) => {
-        setData(JSON.stringify(res));
+        setData(JSON.stringify(res.data));
       })
       .catch((err) => {
         setData("This Error:" + err);
